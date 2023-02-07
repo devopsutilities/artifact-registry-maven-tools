@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.developutilities.artifactregistry.wagon;
+package com.google.cloud.artifactregistry.wagon;
 
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpContent;
@@ -29,8 +29,8 @@ import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.auth.Credentials;
 import com.google.auth.http.HttpCredentialsAdapter;
 import com.google.auth.http.HttpTransportFactory;
-import io.github.developutilities.artifactregistry.auth.CredentialProvider;
-import io.github.developutilities.artifactregistry.auth.DefaultCredentialProvider;
+import com.google.cloud.artifactregistry.auth.CredentialProvider;
+import com.google.cloud.artifactregistry.auth.DefaultCredentialProvider;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -73,22 +73,6 @@ public final class ArtifactRegistryWagon extends AbstractWagon {
 
   @Override
   protected void openConnectionInternal() throws ConnectionException, AuthenticationException {
-	  
-	if (isProxyCredentialsPassed()) {
-		String authUser = System.getProperty("https.proxyUser");
-		String authPassword = System.getProperty("https.proxyPassword");
-		Authenticator.setDefault(
-		    new Authenticator() {
-				@Override
-				public PasswordAuthentication getPasswordAuthentication() {
-					return new PasswordAuthentication(authUser, authPassword.toCharArray());
-				}
-			}
-		);
-		System.setProperty("jdk.http.auth.tunneling.disabledSchemes", "";
-	} 
-	 
-	  
     HttpTransport httpTransport = httpTransportFactory.create();
     try {
       credentials = credentialProvider.getCredential();
@@ -99,13 +83,6 @@ public final class ArtifactRegistryWagon extends AbstractWagon {
       requestFactory = httpTransport.createRequestFactory();
     }
     googleRepository = new GoogleRepository(repository);
-  }
-  
-  private boolean isProxyCredentialsPassed() {
-	  return System.getProperty("https.proxyUser") != null &&
-	          System.getProperty("https.proxyPassword") != null &&
-			  System.getProperty("https.proxyUser") != "" &&
-			  System.getProperty("https.proxyPassword") != "";
   }
 
   @Override

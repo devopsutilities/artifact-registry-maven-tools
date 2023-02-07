@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package io.github.developutilities.artifactregistry.gradle.plugin;
+package com.google.cloud.artifactregistry.gradle.plugin;
 
 import com.google.auth.oauth2.AccessToken;
 import com.google.auth.oauth2.GoogleCredentials;
-import io.github.developutilities.artifactregistry.auth.CredentialProvider;
-import io.github.developutilities.artifactregistry.auth.DefaultCredentialProvider;
+import com.google.cloud.artifactregistry.auth.CredentialProvider;
+import com.google.cloud.artifactregistry.auth.DefaultCredentialProvider;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.net.URI;
