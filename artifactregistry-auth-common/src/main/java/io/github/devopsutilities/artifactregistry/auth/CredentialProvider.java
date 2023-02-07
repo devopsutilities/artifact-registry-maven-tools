@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.google.cloud.artifactregistry.auth;
+package io.github.devopsutilities.artifactregistry.auth;
 
 import com.google.auth.Credentials;
 
