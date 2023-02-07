@@ -61,7 +61,7 @@ you should use the correct location for your repository.
 
 ```gradle
 plugins {
-  id "com.google.cloud.artifactregistry.gradle-plugin" version "2.1.4"
+  id "io.github.devopsutilities.artifactregistry.gradle-plugin" version "2.1.4"
 }
 
 repositories {
@@ -97,11 +97,11 @@ initscript {
     }
   }
   dependencies {
-    classpath "gradle.plugin.com.google.cloud.artifactregistry:artifactregistry-gradle-plugin:2.1.4"
+    classpath "gradle.plugin.io.github.devopsutilities.artifactregistry:artifactregistry-gradle-plugin:2.1.4"
   }
 }
 
-apply plugin: com.google.cloud.artifactregistry.gradle.plugin.ArtifactRegistryGradlePlugin
+apply plugin: io.github.devopsutilities.artifactregistry.gradle.plugin.ArtifactRegistryGradlePlugin
 ```
 
 * To use plugin inside `settings.gradle` file:
@@ -114,9 +114,9 @@ buildscript {
     }
   }
   dependencies {
-    classpath "gradle.plugin.com.google.cloud.artifactregistry:artifactregistry-gradle-plugin:2.1.4"
+    classpath "gradle.plugin.io.github.devopsutilities.artifactregistry:artifactregistry-gradle-plugin:2.1.4"
   }
 }
 
-apply plugin: "com.google.cloud.artifactregistry.gradle-plugin"
+apply plugin: "io.github.devopsutilities.artifactregistry.gradle-plugin"
 ```
