@@ -20,13 +20,13 @@ plugins {
 }
 
 description = 'Artifact Registry Maven Tools'
-ext.project_version = '2.1.6-SNAPSHOT'
+ext.project_version = '2.1.6'
 ext.isReleaseVersion = !project_version.endsWith("SNAPSHOT")
 
 allprojects {
     apply plugin: 'java'
     apply plugin: 'maven'
-    group = 'com.google.cloud.artifactregistry'
+    group = 'io.github.devopsutilities'
     version = project_version
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
@@ -68,11 +68,11 @@ subprojects {
 }
 
 def commonPomAttributes(pom) {
-    pom.url = "https://github.com/GoogleCloudPlatform/build-artifacts-maven-tools"
+    pom.url = "https://github.com/devopsutilities/artifact-registry-maven-tools"
     pom.developers {
         developer {
-            organization= "Google LLC"
-            organizationUrl= "http://www.google.com"
+            organization= "andreatardani"
+            organizationUrl= "artifactregistryproxy@gmail.com"
         }
     }
     pom.licenses {
@@ -82,9 +82,9 @@ def commonPomAttributes(pom) {
         }
     }
     pom.scm {
-        connection = "scm:git:https://github.com/GoogleCloudPlatform/artifact-registry-maven-tools.git"
-        developerConnection = "scm:git:https://github.com/GoogleCloudPlatform/artifact-registry-maven-tools.git"
-        url = "https://github.com/GoogleCloudPlatform/artifact-registry-maven-tools"
+        connection = "scm:git:https://github.com/devopsutilities/artifact-registry-maven-tools.git"
+        developerConnection = "scm:git:https://github.com/devopsutilities/artifact-registry-maven-tools.git"
+        url = "https://github.com/devopsutilities/artifact-registry-maven-tools"
     }
 }
 
@@ -103,7 +103,7 @@ publishing {
             commonPomAttributes(pom)
             pom {
                 name = 'Artifact Registry Maven Wagon'
-                description = 'A Maven wagon used to connect to Artifact Registry Maven repositories.'
+                description = 'A Maven wagon used to connect to Artifact Registry Maven repositories, patched to work with proxy passed as an input flag.'
             }
         }
         authCommon(MavenPublication) {
@@ -126,7 +126,7 @@ publishing {
     repositories {
         mavenLocal()
         maven {
-            url "https://oss.sonatype.org/service/local/staging/deploy/maven2"
+            url "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2"
             if (rootProject.hasProperty("ossrhUsername") && rootProject.hasProperty("ossrhPassword")) {
                 credentials {
                     username ossrhUsername
@@ -138,6 +138,7 @@ publishing {
 }
 
 signing {
+	useGpgCmd()
     required { isReleaseVersion && gradle.taskGraph.hasTask("publish") }
 }
 
