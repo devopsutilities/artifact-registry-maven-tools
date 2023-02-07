@@ -13,19 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 plugins {
     id 'maven-publish'
     id 'signing'
 }
 
 description = 'Artifact Registry Maven Tools'
-ext.project_version = '2.1.6'
+ext.project_version = '2.1.6-SNAPSHOT'
 ext.isReleaseVersion = !project_version.endsWith("SNAPSHOT")
 
 allprojects {
     apply plugin: 'java'
     apply plugin: 'maven'
-    group = 'io.github.devopsutilities'
+    group = 'com.google.cloud.artifactregistry'
     version = project_version
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
@@ -35,6 +36,18 @@ allprojects {
     repositories {
         jcenter()
     }
+
+    task ensureNoGuavaAndroid {
+        doLast {
+            configurations.runtimeClasspath.resolvedConfiguration.resolvedArtifacts.each { artifact ->
+                def dependency = artifact.moduleVersion.id
+                if (dependency.name == "guava" && dependency.version.contains("android")) {
+                    throw new GradleException("unexpected guava android in " + project + ", found '" + dependency +"'");
+                }
+            }
+        }
+    }
+    compileJava.dependsOn ensureNoGuavaAndroid
 }
 
 subprojects {
@@ -55,11 +68,11 @@ subprojects {
 }
 
 def commonPomAttributes(pom) {
-    pom.url = "https://github.com/devopsutilities/artifact-registry-maven-tools"
+    pom.url = "https://github.com/GoogleCloudPlatform/build-artifacts-maven-tools"
     pom.developers {
         developer {
-            organization= "andreatardani"
-            organizationUrl= "artifactregistryproxy@gmail.com"
+            organization= "Google LLC"
+            organizationUrl= "http://www.google.com"
         }
     }
     pom.licenses {
@@ -69,9 +82,9 @@ def commonPomAttributes(pom) {
         }
     }
     pom.scm {
-        connection = "scm:git:https://github.com/devopsutilities/artifact-registry-maven-tools.git"
-        developerConnection = "scm:git:https://github.com/devopsutilities/artifact-registry-maven-tools.git"
-        url = "https://github.com/devopsutilities/artifact-registry-maven-tools"
+        connection = "scm:git:https://github.com/GoogleCloudPlatform/artifact-registry-maven-tools.git"
+        developerConnection = "scm:git:https://github.com/GoogleCloudPlatform/artifact-registry-maven-tools.git"
+        url = "https://github.com/GoogleCloudPlatform/artifact-registry-maven-tools"
     }
 }
 
@@ -90,7 +103,7 @@ publishing {
             commonPomAttributes(pom)
             pom {
                 name = 'Artifact Registry Maven Wagon'
-                description = 'A Maven wagon used to connect to Artifact Registry Maven repositories, patched to work with proxy passed as an input flag.'
+                description = 'A Maven wagon used to connect to Artifact Registry Maven repositories.'
             }
         }
         authCommon(MavenPublication) {
@@ -113,7 +126,7 @@ publishing {
     repositories {
         mavenLocal()
         maven {
-            url "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2"
+            url "https://oss.sonatype.org/service/local/staging/deploy/maven2"
             if (rootProject.hasProperty("ossrhUsername") && rootProject.hasProperty("ossrhPassword")) {
                 credentials {
                     username ossrhUsername
@@ -125,8 +138,6 @@ publishing {
 }
 
 signing {
-    useGpgCmd()
-    // sign configurations.archives
     required { isReleaseVersion && gradle.taskGraph.hasTask("publish") }
 }
 

@@ -3,7 +3,7 @@
     <component>
       <role>org.apache.maven.wagon.Wagon</role>
       <role-hint>artifactregistry</role-hint>
-      <implementation>io.github.devopsutilities.artifactregistry.wagon.ArtifactRegistryWagon</implementation>
+      <implementation>com.google.cloud.artifactregistry.wagon.ArtifactRegistryWagon</implementation>
       <instantiation-strategy>per-lookup</instantiation-strategy>
     </component>
   </components>
