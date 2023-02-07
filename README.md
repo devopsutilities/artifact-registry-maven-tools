@@ -22,9 +22,9 @@ To enable the wagon, add the following configuration to the `pom.xml` in your pr
 ```xml
     <extensions>
         <extension>
-            <groupId>com.google.cloud.artifactregistry</groupId>
+            <groupId>io.github.devopsutilities.artifactregistry</groupId>
             <artifactId>artifactregistry-maven-wagon</artifactId>
-            <version>2.1.4</version>
+            <version>2.1.6</version>
         </extension>
     </extensions>
 ```
