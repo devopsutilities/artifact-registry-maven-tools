@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.google.cloud.artifactregistry.wagon;
+package io.github.developutilities.artifactregistry.wagon;
 
 import com.google.api.client.http.HttpHeaders;
 import com.google.api.client.http.HttpResponseException;
@@ -25,7 +25,7 @@ import com.google.api.client.testing.http.MockLowLevelHttpResponse;
 import com.google.auth.Credentials;
 import com.google.auth.oauth2.AccessToken;
 import com.google.auth.oauth2.GoogleCredentials;
-import com.google.cloud.artifactregistry.auth.CredentialProvider;
+import io.github.developutilities.artifactregistry.auth.CredentialProvider;
 import com.google.common.io.Files;
 import java.io.IOException;
 import java.nio.charset.Charset;

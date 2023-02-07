@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.google.cloud.artifactregistry.wagon;
+package io.github.developutilities.artifactregistry.wagon;
 
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpRequest;

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.google.cloud.artifactregistry.wagon;
+package io.github.developutilities.artifactregistry.wagon;
 
 import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.HttpRequestInitializer;
