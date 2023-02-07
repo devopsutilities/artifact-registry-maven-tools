@@ -22,9 +22,9 @@ To enable the wagon, add the following configuration to the `pom.xml` in your pr
 ```xml
     <extensions>
         <extension>
-            <groupId>com.google.cloud.artifactregistry</groupId>
+            <groupId>io.github.devopsutilities.artifactregistry</groupId>
             <artifactId>artifactregistry-maven-wagon</artifactId>
-            <version>2.1.4</version>
+            <version>2.1.6</version>
         </extension>
     </extensions>
 ```
@@ -61,7 +61,7 @@ you should use the correct location for your repository.
 
 ```gradle
 plugins {
-  id "com.google.cloud.artifactregistry.gradle-plugin" version "2.1.4"
+  id "io.github.devopsutilities.artifactregistry.gradle-plugin" version "2.1.4"
 }
 
 repositories {
@@ -97,11 +97,11 @@ initscript {
     }
   }
   dependencies {
-    classpath "gradle.plugin.com.google.cloud.artifactregistry:artifactregistry-gradle-plugin:2.1.4"
+    classpath "gradle.plugin.io.github.devopsutilities.artifactregistry:artifactregistry-gradle-plugin:2.1.4"
   }
 }
 
-apply plugin: com.google.cloud.artifactregistry.gradle.plugin.ArtifactRegistryGradlePlugin
+apply plugin: ArtifactRegistryGradlePlugin
 ```
 
 * To use plugin inside `settings.gradle` file:
@@ -114,9 +114,9 @@ buildscript {
     }
   }
   dependencies {
-    classpath "gradle.plugin.com.google.cloud.artifactregistry:artifactregistry-gradle-plugin:2.1.4"
+    classpath "gradle.plugin.io.github.devopsutilities.artifactregistry:artifactregistry-gradle-plugin:2.1.4"
   }
 }
 
-apply plugin: "com.google.cloud.artifactregistry.gradle-plugin"
+apply plugin: "io.github.devopsutilities.artifactregistry.gradle-plugin"
 ```
